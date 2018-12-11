@@ -24,6 +24,11 @@ class Game extends Component {
     console.log(this.state.poemLines);
   };
 
+  revealPoem = () => {
+    // hide other components
+    // loop through poem to create paragraph tags under h3 of final poem
+  };
+
   render() {
     const exampleFormat = FIELDS.map(field => {
       if (field.key) {
@@ -56,7 +61,10 @@ class Game extends Component {
           playerNumber={this.state.poemLines.length + 1}
         />
 
-        <FinalPoem poem={this.state.poemLines} />
+        <FinalPoem
+          poem={this.state.poemLines}
+          revealPoemCallback={this.revealPoem}
+        />
       </div>
     );
   }
