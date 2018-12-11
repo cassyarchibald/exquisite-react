@@ -1,18 +1,29 @@
-import React, { Component } from 'react';
-import './Game.css';
-import PlayerSubmissionForm from './PlayerSubmissionForm';
-import FinalPoem from './FinalPoem';
-import RecentSubmission from './RecentSubmission';
+import React, { Component } from "react";
+import "./Game.css";
+import PlayerSubmissionForm from "./PlayerSubmissionForm";
+import FinalPoem from "./FinalPoem";
+import RecentSubmission from "./RecentSubmission";
+import PropTypes from "prop-types";
 
 class Game extends Component {
-
   constructor(props) {
     super(props);
+    this.state = {
+      // Add lines of poem to this as they are submitted
+      poemLines: []
+    };
   }
+  // Add poem line to poemLines
+  addPoemLine = lineToAdd => {
+    this.state.poemLines.push(lineToAdd);
+    this.setState({
+      poemLines: this.state.poemLines
+    });
+    console.log(this.state.poemLines);
+  };
 
   render() {
-
-    const exampleFormat = FIELDS.map((field) => {
+    const exampleFormat = FIELDS.map(field => {
       if (field.key) {
         return field.placeholder;
       } else {
@@ -24,20 +35,23 @@ class Game extends Component {
       <div className="Game">
         <h2>Game</h2>
 
-        <p>Each player should take turns filling out and submitting the form below. Each turn should be done individually and <em>in secret!</em> Take inspiration from the revealed recent submission. When all players are finished, click the final button on the bottom to reveal the entire poem.</p>
+        <p>
+          Each player should take turns filling out and submitting the form
+          below. Each turn should be done individually and <em>in secret!</em>{" "}
+          Take inspiration from the revealed recent submission. When all players
+          are finished, click the final button on the bottom to reveal the
+          entire poem.
+        </p>
 
         <p>Please follow the following format for your poetry submission:</p>
 
-        <p className="Game__format-example">
-          { exampleFormat }
-        </p>
+        <p className="Game__format-example">{exampleFormat}</p>
 
-        <RecentSubmission />
+        <RecentSubmission poem={this.state.poemLines} />
 
-        <PlayerSubmissionForm />
+        <PlayerSubmissionForm addPoemLineCallback={this.addPoemLine} />
 
-        <FinalPoem />
-
+        <FinalPoem poem={this.state.poemLines} />
       </div>
     );
   }
@@ -46,31 +60,35 @@ class Game extends Component {
 const FIELDS = [
   "The",
   {
-    key: 'adj1',
-    placeholder: 'adjective',
+    key: "adj1",
+    placeholder: "adjective"
   },
   {
-    key: 'noun1',
-    placeholder: 'noun',
+    key: "noun1",
+    placeholder: "noun"
   },
   {
-    key: 'adv',
-    placeholder: 'adverb',
+    key: "adv",
+    placeholder: "adverb"
   },
   {
-    key: 'verb',
-    placeholder: 'verb',
+    key: "verb",
+    placeholder: "verb"
   },
   "the",
   {
-    key: 'adj2',
-    placeholder: 'adjective',
+    key: "adj2",
+    placeholder: "adjective"
   },
   {
-    key: 'noun2',
-    placeholder: 'noun',
+    key: "noun2",
+    placeholder: "noun"
   },
-  ".",
+  "."
 ];
+
+Game.propTypes = {
+  // prop types here
+};
 
 export default Game;
