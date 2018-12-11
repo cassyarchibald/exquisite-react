@@ -15,6 +15,8 @@ class Game extends Component {
   }
   // Add poem line to poemLines
   addPoemLine = lineToAdd => {
+    // Need to make poem
+
     this.state.poemLines.push(lineToAdd);
     this.setState({
       poemLines: this.state.poemLines

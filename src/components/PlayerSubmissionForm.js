@@ -27,12 +27,21 @@ class PlayerSubmissionForm extends Component {
     const fieldValue = event.target.value;
     console.log(fieldName);
     updatedState[fieldName] = fieldValue;
-    console.log(updatedState);
     // Send poem line to callback function in props
-    // const newPoemLine = {
-    // field: this.state.field
-    // }
-    // this.props.addPoemLineCallback(newPoemLine)
+    const { noun1, noun2, adjective1, adjective2, verb, adverb } = this.state;
+    // Build poem
+    const newPoemLine = `The ${adjective1} ${noun1} ${adverb} ${verb} the ${adjective2} ${noun2}`;
+
+    this.props.addPoemLineCallback(newPoemLine);
+    // Clear form
+    this.setState({
+      noun1: "",
+      noun2: "",
+      adjective1: "",
+      adjective2: "",
+      verb: "",
+      adverb: ""
+    });
   };
   onInputChange = event => {
     const updatedState = {};
@@ -40,7 +49,6 @@ class PlayerSubmissionForm extends Component {
     const value = event.target.value;
     updatedState[field] = value;
     this.setState(updatedState);
-    console.log(this.state);
   };
 
   render() {
@@ -54,11 +62,9 @@ class PlayerSubmissionForm extends Component {
         >
           <div className="PlayerSubmissionForm__poem-inputs">
             The
-            {
-              // Put your form inputs here... We've put in one below as an example
-            }
             <input
               name="adjective1"
+              value={this.state.adjective1}
               placeholder="adjective"
               type="text"
               className="PlayerSubmissionForm__input--invalid"
@@ -66,6 +72,7 @@ class PlayerSubmissionForm extends Component {
             />
             <input
               name="noun1"
+              value={this.state.noun1}
               placeholder="noun"
               type="text"
               className="PlayerSubmissionForm__input--invalid"
@@ -73,6 +80,7 @@ class PlayerSubmissionForm extends Component {
             />
             <input
               name="adverb"
+              value={this.state.adverb}
               placeholder="adverb"
               type="text"
               className="PlayerSubmissionForm__input--invalid"
@@ -80,6 +88,7 @@ class PlayerSubmissionForm extends Component {
             />
             <input
               name="verb"
+              value={this.state.verb}
               placeholder="verb"
               type="text"
               className="PlayerSubmissionForm__input--invalid"
@@ -88,6 +97,7 @@ class PlayerSubmissionForm extends Component {
             the
             <input
               name="adjective2"
+              value={this.state.adjective2}
               placeholder="adjective"
               type="text"
               className="PlayerSubmissionForm__input--invalid"
@@ -95,6 +105,7 @@ class PlayerSubmissionForm extends Component {
             />
             <input
               name="noun2"
+              value={this.state.noun2}
               placeholder="noun"
               type="text"
               className="PlayerSubmissionForm__input--invalid"
