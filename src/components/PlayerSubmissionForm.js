@@ -54,7 +54,9 @@ class PlayerSubmissionForm extends Component {
   render() {
     return (
       <div className="PlayerSubmissionForm">
-        <h3>Player Submission Form for Player #{}</h3>
+        <h3>
+          Player Submission Form for Player #{`${this.props.playerNumber}`}
+        </h3>
 
         <form
           className="PlayerSubmissionForm__form"
@@ -128,7 +130,8 @@ class PlayerSubmissionForm extends Component {
 
 PlayerSubmissionForm.propTypes = {
   // prop types here
-  addPoemLineCallback: PropTypes.func
+  addPoemLineCallback: PropTypes.func,
+  playerNumber: PropTypes.number
 };
 
 export default PlayerSubmissionForm;
